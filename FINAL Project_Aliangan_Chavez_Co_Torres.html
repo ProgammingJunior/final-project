@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Marcus Kane Co</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background-color: #fff;
+      overflow-x: hidden;
+    }
+
+    /* Login Page Styles */
+    .login-container {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #f5893c 0%, #f57c00 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .login-box {
+      background: white;
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .login-logo {
+      width: 60px;
+      height: 60px;
+      background: url('https://cdn.siter.io/assets/ast_BauWFE1wEcPqAk1awLd42LiCT/a525c535-97d4-41ba-a6ee-2dd9e5a00bf6.svg') no-repeat center/contain;
+      margin: 0 auto 20px;
+    }
+
+    .adidas-login-logo {
+      height: 30px;
+      margin-bottom: 30px;
+    }
+
+    .login-box h2 {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 30px;
+      color: #333;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+      text-align: left;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #555;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 12px 16px;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 16px;
+      transition: border-color 0.3s ease;
+    }
+
+    .form-group input:focus {
+      outline: none;
+      border-color: #f5893c;
+    }
+
+    .login-btn, .signup-btn {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      margin-bottom: 15px;
+    }
+
+    .login-btn {
+      background: #f5893c;
+      color: white;
+    }
+
+    .login-btn:hover {
+      background: #e6743a;
+    }
+
+    .signup-btn {
+      background: transparent;
+      color: #f5893c;
+      border: 2px solid #f5893c;
+    }
+
+    .signup-btn:hover {
+      background: #f5893c;
+      color: white;
+    }
+
+    .toggle-link {
+      color: #f5893c;
+      text-decoration: none;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 10px;
+      display: inline-block;
+    }
+
+    .toggle-link:hover {
+      text-decoration: underline;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    /* Main Website Styles */
+    .main-website {
+      display: none;
+    }
+
+    .bar-top {
+      height: 40px;
+      background: black;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: 700;
+      font-size: 14px;
+      text-align: center;
+      padding: 0 10px;
+    }
+
+    .bar-mid {
+      background: white;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      padding: 10px 20px;
+      justify-content: space-between;
+    }
+
+    .logo-section {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo {
+      width: 40px;
+      height: 40px;
+      background: url('https://cdn.siter.io/assets/ast_BauWFE1wEcPqAk1awLd42LiCT/a525c535-97d4-41ba-a6ee-2dd9e5a00bf6.svg') no-repeat center/contain;
+    }
+
+    .adidas-logo img {
+      height: 20px;
+      width: auto;
+      filter: brightness(0);
+    }
+
+    nav {
+      display: flex;
+      gap: 20px;
+      font-weight: 700;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: black;
+      padding: 5px;
+    }
+
+    .search-bar {
+      padding: 5px 10px;
+      background: #ECEFF1;
+      font-size: 14px;
+      border: none;
+      border-radius: 4px;
+    }
+
+    .promo-bar {
+      background: #d9d9d9;
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 14px;
+      text-align: center;
+      padding: 0 10px;
+    }
+
+    .feature-section {
+      display: flex;
+      flex-wrap: wrap;
+      width: 100%;
+      min-height: 500px;
+    }
+
+    .left-panel,
+    .right-panel {
+      width: 100%;
+      flex: 1 1 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      color: white;
+    }
+
+    .left-panel {
+      background: #f5893c;
+      padding: 40px;
+    }
+
+    .right-panel {
+      position: relative;
+      background-color: #f57c00;
+      overflow: hidden;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    .right-panel img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: auto;
+      object-fit: cover;
+      z-index: 1;
+    }
+
+    .text-overlay {
+      position: absolute;
+      right: 30px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 2;
+      text-align: right;
+    }
+
+    .text-overlay h2 {
+      font-size: 32px;
+      margin-bottom: 10px;
+      color: white;
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.6);
+    }
+
+    .text-overlay p {
+      font-size: 18px;
+      letter-spacing: 6px;
+      color: white;
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.6);
+    }
+
+    .shoe-image {
+      width: 80%;
+      max-width: 300px;
+      background: url('https://cdn.siter.io/assets/ast_oYjXpqt9dzb5ifzeK8zS887on/b946a652-201e-479f-9654-064f6987f2f0.webp') no-repeat center/contain;
+      background-size: contain;
+      height: 200px;
+      margin-bottom: 20px;
+    }
+
+    .left-panel h2 {
+      font-size: 22px;
+      margin-bottom: 10px;
+    }
+
+    .left-panel p {
+      font-size: 16px;
+      text-align: center;
+    }
+
+    .nike-section {
+      padding: 40px 20px;
+      background: #f5f5f5;
+    }
+
+    .nike-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      justify-content: center;
+    }
+
+    .nike-item {
+      background: white;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    .nike-item img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      max-height: 180px;
+      margin-bottom: 15px;
+    }
+
+    .nike-item h3 {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .nike-item p {
+      font-size: 14px;
+      color: #555;
+    }
+
+    @media (max-width: 768px) {
+      .feature-section {
+        flex-direction: column;
+      }
+
+      .bar-mid {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+
+      nav {
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .text-overlay h2 {
+        font-size: 24px;
+      }
+
+      .text-overlay p {
+        font-size: 14px;
+        letter-spacing: 3px;
+      }
+
+      .login-box {
+        padding: 30px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Login Page -->
+  <div id="loginPage" class="login-container">
+    <div class="login-box">
+      <div class="login-logo"></div>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/2/20/Adidas_Logo.svg" alt="Adidas" class="adidas-login-logo" style="filter: brightness(0);" />
+      
+      <!-- Login Form -->
+      <div id="loginForm">
+        <h2>Welcome Back</h2>
+        <form onsubmit="handleLogin(event)">
+          <div class="form-group">
+            <label for="loginEmail">Email</label>
+            <input type="email" id="loginEmail" required>
+          </div>
+          <div class="form-group">
+            <label for="loginPassword">Password</label>
+            <input type="password" id="loginPassword" required>
+          </div>
+          <button type="submit" class="login-btn">LOG IN</button>
+        </form>
+        <a href="#" class="toggle-link" onclick="showSignup()">Don't have an account? Create one</a>
+      </div>
+
+      <!-- Signup Form -->
+      <div id="signupForm" class="hidden">
+        <h2>Create Account</h2>
+        <form onsubmit="handleSignup(event)">
+          <div class="form-group">
+            <label for="signupName">Full Name</label>
+            <input type="text" id="signupName" required>
+          </div>
+          <div class="form-group">
+            <label for="signupEmail">Email</label>
+            <input type="email" id="signupEmail" required>
+          </div>
+          <div class="form-group">
+            <label for="signupPassword">Password</label>
+            <input type="password" id="signupPassword" required minlength="6">
+          </div>
+          <button type="submit" class="signup-btn">CREATE ACCOUNT</button>
+        </form>
+        <a href="#" class="toggle-link" onclick="showLogin()">Already have an account? Log in</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Website -->
+  <div id="mainWebsite" class="main-website">
+    <div class="bar-top">
+      FREE SHIPPING FOR ADICLUB MEMBERS AND ALL IN APP
+    </div>
+
+    <div class="bar-mid">
+      <div class="logo-section">
+        <div class="logo"></div>
+        <div class="adidas-logo">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/2/20/Adidas_Logo.svg" alt="Adidas" />
+        </div>
+      </div>
+      <nav>
+        <a href="https://www.adidas.com/us/shoes" target="_blank">SHOES</a>
+        <a href="https://www.adidas.com/us/men" target="_blank">MEN</a>
+        <a href="https://www.adidas.com/us/women" target="_blank">WOMEN</a>
+        <a href="https://www.adidas.com/us/kids" target="_blank">KIDS</a>
+        <a href="https://www.adidas.com.ph/search?q=sports" target="_blank">SPORTS</a>
+        <a href="https://www.adidas.com.ph/search?q=brands" target="_blank">BRANDS</a>
+        <a href="https://www.adidas.com.ph/outlet" target="_blank">OUTLETS</a>
+      </nav>
+      <input class="search-bar" type="text" placeholder="Search" />
+    </div>
+
+    <div class="promo-bar">
+      ADIZERO EVO SL. Speed-inspired shoes designed for fast culture. Check out restocked color ways and sizes here.
+    </div>
+
+    <div class="feature-section">
+      <div class="left-panel">
+        <div class="shoe-image"></div>
+        <h2>THE MC' KANES CO 1</h2>
+        <p>Inspired by Marcus's zodiac sign. Electrifying, futuristic, and most importantly—fly.</p>
+      </div>
+      <div class="right-panel">
+        <img src="Marcus.png" alt="Marcus Kane side view" />
+        <div class="text-overlay">
+          <h2>MARCUS KANE CO</h2>
+          <p>THE MC' KANES CO 1</p>
+        </div>
+      </div>
+    </div>
+
+    <section style="background-color: #282F44; padding: 60px 40px; font-family: 'Inter', sans-serif; color: white;">
+      <div style="
+        display: flex;
+        max-width: 1600px;
+        margin: 0 auto;
+        gap: 60px;
+        align-items: center;
+        justify-content: flex-start;
+      ">
+        <div style="flex: 0 0 400px; height: 400px;">
+          <video 
+            width="400" 
+            height="400" 
+            autoplay 
+            muted 
+            loop 
+            playsinline 
+            style="display: block; border: none; object-fit: cover;">
+            <source src="https://assets.adidas.com/videos/ar_1,w_720,c_fill,q_auto,f_auto/692614a5640044ff95ea82b741c637e9_d98c/Terrex_Skychaser_GORE-TEX_Hiking_Shoes_Black_IH2802_video.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+        <div style="
+          flex: 1;
+          max-width: 700px;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          text-align: left;
+        ">
+          <h3 style="font-size: 24px; margin-bottom: 12px; font-weight: bold; color: orange;">THE MC' KANES CO 1</h3>
+          <p style="font-size: 16px; line-height: 1.6;">
+            Built for tough hikes and fast trail moves, the adidas Terrex Skychaser offers a perfect mix of protection, support, and comfort. These shoes feel light and responsive like trail runners but have the durability of hiking footwear. They feature waterproof GORE-TEX to keep your feet dry and breathable, plus a tough ripstop upper for lasting wear. The Continental™ Rubber sole grips well on all surfaces, while Lightstrike cushioning provides a quick, agile feel.<br><br>
+            Made with at least 20% recycled and renewable materials, these shoes help reduce waste and lower dependence on limited resources.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <div class="nike-grid">
+      <div class="nike-item">
+        <a href="https://www.adidas.com/us/harden-volume-9-shoes/JH6484.html" target="_blank">
+          <img src="https://assets.adidas.com/images/h_2000,f_auto,q_auto,fl_lossy,c_fill,g_auto/d0b7ce9f03554638b4412e1f055790c5_9366/Harden_Volume_9_Shoes_Green_JH6484_01_00_standard.jpg" alt="shoe 1">
+        </a>
+        <h3>Harden Volume 9 Shoes</h3>
+        <p>Signature shoes from adidas Basketball and James Harden.</p>
+      </div>
+
+      <div class="nike-item">
+        <a href="https://www.adidas.com/us/fear-of-god-athletics-ii-basketball-shoes/JS0978.html" target="_blank">
+          <img src="https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/dec56aeb10b648be9ca99cee4561af9c_9366/Fear_of_God_Athletics_II_Basketball_Shoes_Beige_JS0978_HM1.jpg" alt="shoe 2">
+        </a>
+        <h3>Fear of God Athletics II Basketball Shoes</h3>
+        <p>Basketball shoes from Fear of God Athletics.</p>
+      </div>
+
+      <div class="nike-item">
+        <a href="https://www.adidas.com/us/adidas-taekwondo-shoes/JQ4775.html" target="_blank">
+          <img src="https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/d0b63ca797da4bf28e65016b7280cda2_9366/adidas_Taekwondo_Shoes_Black_JQ4775_01_standard.jpg" alt="shoe 3">
+        </a>
+        <h3>Adidas Taekwondo Shoes</h3>
+        <p>Kick it in these slip-on, super low-profile shoes inspired by martial arts.</p>
+      </div>
+
+      <div class="nike-item">
+        <a href="https://www.adidas.com/us/campus-00s-beta-shoes/JH9779.html" target="_blank">
+          <img src="https://assets.adidas.com/images/h_2000,f_auto,q_auto,fl_lossy,c_fill,g_auto/03821f3a8bd84e35be1b35462ffc739f_9366/Campus_00s_Beta_Shoes_Beige_JH9779_01_00_standard.jpg" alt="shoe 4">
+        </a>
+        <h3>Campus 00s Beta Shoes</h3>
+        <p>Skate-inspired shoes that play with colour and layers.</p>
+      </div>
+    </div>
+
+    <section style="background-color: black; color: white; padding: 60px 20px; text-align: center; font-family: sans-serif;">
+      <h2 style="font-size: 48px; font-weight: 900; margin-bottom: 30px; letter-spacing: 1.5px; text-transform: uppercase;">
+        ADIDAS SPORTS SHOP – PERFORMANCE, STYLE & INNOVATION SINCE 1949
+      </h2>
+      <p style="max-width: 800px; margin: 0 auto 20px auto; font-size: 16px; line-height: 1.6;">
+        Sport inspires connection, focus, and transformation. It brings people together and motivates change. At adidas, we believe in the power of sport to inspire greatness—through real stories, breakthrough technologies, and the drive to move forward.
+      </p>
+      <p style="max-width: 800px; margin: 0 auto 20px auto; font-size: 16px; line-height: 1.6;">
+        Discover high-performance gear designed to elevate your training. Whether you're hitting the track, dominating the court, or staying active in your own way, adidas provides cutting-edge sportswear to support your goals and push your boundaries.
+      </p>
+      <p style="max-width: 800px; margin: 0 auto 20px auto; font-size: 16px; line-height: 1.6;">
+        Browse our online store to find the latest adidas innovations—where bold design meets everyday movement. From yoga instructors inspiring balance to hikers chasing adventure, we equip all athletes at every level to perform their best, no matter where they are.
+      </p>
+      <p style="max-width: 800px; margin: 0 auto 20px auto; font-size: 16px; line-height: 1.6;">
+        More than a shop, adidas is a global platform for creators. Our products are built with precision, resilience, and intention—helping you move confidently and express your unique style. Backed by partnerships with top talent, we craft gear that supports movement and celebrates the spirit of sport. Wherever your path leads, adidas is with you—every stride, every step.
+      </p>
+      <div style="margin-top: 50px;">
+        <img src="https://images.seeklogo.com/logo-png/53/1/adidas-logo-png_seeklogo-536109.png" style="width: 100px; height: auto;">
+      </div>
+    </section>
+
+    <section style="background-color: #eee524; padding: 40px 20px; text-align: center;">
+      <h2 style="font-size: 24px; font-weight: bold; margin-bottom: 20px;">
+        BECOME A MEMBER & GET 10% OFF
+      </h2>
+      <a href="https://www.adidas.com.ph/adiclub" target="_blank" style="
+        display: inline-block;
+        background-color: black;
+        color: white;
+        padding: 12px 24px;
+        font-weight: bold;
+        text-decoration: none;
+        border: 2px solid black;
+        transition: background-color 0.3s ease;
+      " onmouseover="this.style.backgroundColor='#333'" onmouseout="this.style.backgroundColor='black'">
+        SIGN UP FOR FREE →
+      </a>
+    </section>
+  </div>
+
+  <script>
+    // Simple authentication functions
+    function showLogin() {
+      document.getElementById('loginForm').classList.remove('hidden');
+      document.getElementById('signupForm').classList.add('hidden');
+    }
+
+    function showSignup() {
+      document.getElementById('loginForm').classList.add('hidden');
+      document.getElementById('signupForm').classList.remove('hidden');
+    }
+
+    function handleLogin(event) {
+      event.preventDefault();
+      const email = document.getElementById('loginEmail').value;
+      const password = document.getElementById('loginPassword').value;
+      
+      // Simple validation - in a real app, you'd validate against a server
+      if (email && password) {
+        showMainWebsite();
+      } else {
+        alert('Please fill in all fields');
+      }
+    }
+
+    function handleSignup(event) {
+      event.preventDefault();
+      const name = document.getElementById('signupName').value;
+      const email = document.getElementById('signupEmail').value;
+      const password = document.getElementById('signupPassword').value;
+      
+      // Simple validation
+      if (name && email && password && password.length >= 6) {
+        alert('Account created successfully! Please log in.');
+        showLogin();
+      } else {
+        alert('Please fill in all fields correctly (password must be at least 6 characters)');
+      }
+    }
+
+    function showMainWebsite() {
+      document.getElementById('loginPage').style.display = 'none';
+      document.getElementById('mainWebsite').style.display = 'block';
+    }
+  </script>
+</body>
+</html>
